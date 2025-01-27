@@ -1,10 +1,28 @@
-body {
-    font-family: sans-serif;
-    margin: 20px;
-}
 #quoteDisplay {
     margin: 20px 0;
     padding: 15px;
     border: 1px solid #ddd;
     background-color: #f9f9f9;
+}
+#addQuoteFormContainer div {
+    margin-bottom: 10px;
+}
+#newQuoteText, #newQuoteCategory {
+    padding: 8px;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+}
+#addQuoteFormContainer button {
+    padding: 8px 15px;
+    cursor: pointer;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+}
+ #newQuote{
+    padding: 8px 15px;
+    cursor: pointer;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
 }
