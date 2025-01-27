@@ -1,5 +1,5 @@
 // Array to store quotes
-document.addEventListener('DOMContentLoaded', function() {
+
 let quotes = [
     { text: "The only limit to our realization of tomorrow is our doubts of today.", category: "Motivation" },
     { text: "In the middle of every difficulty lies opportunity.", category: "Inspiration" },
@@ -29,5 +29,4 @@ function addQuote() {
 
 // Event listener for the "Show New Quote" button
 document.getElementById('newQuote').addEventListener('click', showRandomQuote);
-
-)};
+createAddQuoteForm();
