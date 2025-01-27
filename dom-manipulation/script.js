@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function showRandomQuote() {
        const randomIndex = Math.floor(Math.random() * quotes.length);
       const randomQuote = quotes[randomIndex];
-      quoteDisplay.textContent = `"${randomQuote.text}" - Category: ${randomQuote.category}`;
+      quoteDisplay.innerHTML = `"${randomQuote.text}" - Category: ${randomQuote.category}`;
     }
 
     // Function to create the add quote form
