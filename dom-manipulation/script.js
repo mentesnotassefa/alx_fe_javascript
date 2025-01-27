@@ -10,7 +10,18 @@ let quotes = [
 function showRandomQuote() {
     const randomIndex = Math.floor(Math.random() * quotes.length);
     const randomQuote = quotes[randomIndex];
-    document.getElementById('quoteDisplay').innerHTML = `${randomQuote.text} - ${randomQuote.category}`;
+    // Clear previous quote
+    quoteDisplay.innerHTML = '';
+
+    // Create elements for the quote and category
+    const quoteText = document.createElement('p');
+    const quoteCategory = document.createElement('p');
+    quoteText.innerHTML = `Quote: ${randomQuote.text}`;
+    quoteCategory.innerHTML = `Category: ${randomQuote.category}`;
+
+    // Append elements to the quoteDisplay
+    quoteDisplay.appendChild(quoteText);
+    quoteDisplay.appendChild(quoteCategory);
 }
 
 // Function to add a new quote
