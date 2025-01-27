@@ -1,10 +1,14 @@
 // Array to store quotes
 
 let quotes = [
-    { text: "The only limit to our realization of tomorrow is our doubts of today.", category: "Motivation" },
-    { text: "In the middle of every difficulty lies opportunity.", category: "Inspiration" },
-    // Add more quotes as needed
+    { text: "The only way to do great work is to love what you do.", category: "Motivational" },
+    { text: "Life is what happens when you're busy making other plans.", category: "Life" },
+    { text: "ድር ቢያብር አንበሳ ያስር", category: "Inspirational" },
+    { text: "The purpose of our lives is to be happy", category: "Happiness"},
+    { text: "Get busy living or get busy dying", category: "Motivational"},
+    { text: "You only live once, but if you do it right, once is enough", category: "Life"}
 ];
+
 
 // Function to show a random quote
 function showRandomQuote() {
@@ -42,4 +46,4 @@ function addQuote() {
 
 // Event listener for the "Show New Quote" button
 document.getElementById('newQuote').addEventListener('click', showRandomQuote);
-createAddQuoteForm();
+
