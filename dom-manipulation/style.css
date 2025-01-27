@@ -1,0 +1,10 @@
+body {
+    font-family: sans-serif;
+    margin: 20px;
+}
+#quoteDisplay {
+    margin: 20px 0;
+    padding: 15px;
+    border: 1px solid #ddd;
+    background-color: #f9f9f9;
+}
