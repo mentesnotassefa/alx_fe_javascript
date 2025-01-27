@@ -64,7 +64,7 @@ function addQuote() {
 
 // Function to export quotes as a JSON file
 function exportQuotes() {
-    const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(quotes));
+    const dataStr = "data:application/json;charset=utf-8," + encodeURIComponent(JSON.stringify(quotes));
     const downloadAnchorNode = document.createElement('a');
     downloadAnchorNode.setAttribute("href", dataStr);
     downloadAnchorNode.setAttribute("download", "quotes.json");
