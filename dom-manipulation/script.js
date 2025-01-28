@@ -61,8 +61,10 @@ function addQuote() {
         alert("Please enter both quote text and category.");
     }
 }
- // Function to export quotes to JSON file
- function exportToJson() {
+
+// Function to export quotes as a JSON file
+// Function to export quotes to JSON file
+function exportToJson() {
     const jsonStr = JSON.stringify(quotes, null, 2);
     const blob = new Blob([jsonStr], { type: 'application/json' });
    const url = URL.createObjectURL(blob);
