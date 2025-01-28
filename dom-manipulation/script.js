@@ -1,5 +1,20 @@
+/ Function to show notifications
+function showNotification(message) {
+    const notification = document.getElementById('notification');
+    const notificationMessage = document.getElementById('notificationMessage');
+    notificationMessage.innerText = message;
+    notification.style.display = 'block';
+    setTimeout(() => {
+        notification.style.display = 'none';
+    }, 5000);
+}
 
-const notificationContainer = document.getElementById('notificationContainer'); // Assuming you have a container for notifications
+// Function to hide notifications
+function hideNotification() {
+    const notification = document.getElementById('notification');
+    notification.style.display = 'none';
+}
+
 async function fetchQuotesFromServer() {
     try {
         const response = await fetch('https://jsonplaceholder.typicode.com/posts');
