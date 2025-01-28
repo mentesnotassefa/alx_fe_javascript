@@ -1,71 +1,5 @@
 
 
-async function fetchQuotesFromServer() {
-    try {
-        const response = await fetch('https://jsonplaceholder.typicode.com/posts');
-        const data = await response.json();
-        return data.map(item => ({ text: item.title, category: item.title }));
-    } catch (error) {
-        console.error('Error fetching quotes from server:', error);
-        return [];
-    }
-}
-async function postQuoteToServer(quote) {
-    try {
-        await fetch('https://jsonplaceholder.typicode.com/posts', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(quote)
-        });
-    } catch (error) {
-        console.error('Error posting quote to server:', error);
-    }
-}
-async function syncQuotes() {
-    const serverQuotes = await fetchQuotesFromServer();
-    // Resolve conflicts - Server data takes precedence
-    serverQuotes.forEach(serverQuote => {
-        const existingQuote = quotes.find(quote => quote.text === serverQuote.text);
-        if (!existingQuote) {
-            quotes.push(serverQuote);
-        }
-    });
-    saveQuotes();
-    filterQuotes(); // Update the displayed quotes
-}
-
-// Set an interval to sync with the server every 5 minutes
-setInterval(syncWithServer, 300000);
-
-async function addQuote() {
-    const newQuoteText = document.getElementById('newQuoteText').value;
-    const newQuoteCategory = document.getElementById('newQuoteCategory').value;
-    if (newQuoteText && newQuoteCategory) {
-        const newQuote = { text: newQuoteText, category: newQuoteCategory };
-        quotes.push(newQuote);
-        saveQuotes();  // Save quotes to local storage
-        await postQuoteToServer(newQuote);  // Post the new quote to the server
-
-        // Update the categories dropdown if a new category is introduced
-        if (!Array.from(document.getElementById('categoryFilter').options).some(option => option.value === newQuoteCategory)) {
-            const option = document.createElement('option');
-            option.value = newQuoteCategory;
-            option.innerText = newQuoteCategory;
-            document.getElementById('categoryFilter').appendChild(option);
-        }
-
-        document.getElementById('newQuoteText').value = '';
-        document.getElementById('newQuoteCategory').value = '';
-        alert("New quote added successfully!");
-        filterQuotes();  // Update the displayed quotes
-    } else {
-        alert("Please enter both quote text and category.");
-    }
-}
-
-
 
 
 // Array to store quotes
@@ -215,3 +149,70 @@ function importFromJsonFile(event) {
 document.getElementById('newQuote').addEventListener('click', showRandomQuote);
 populateCategories();
 createAddQuoteForm();
+
+
+async function fetchQuotesFromServer() {
+    try {
+        const response = await fetch('https://jsonplaceholder.typicode.com/posts');
+        const data = await response.json();
+        return data.map(item => ({ text: item.title, category: "Server" }));
+    } catch (error) {
+        console.error('Error fetching quotes from server:', error);
+        return [];
+    }
+}
+async function postQuoteToServer(quote) {
+    try {
+        await fetch('https://jsonplaceholder.typicode.com/posts', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(quote)
+        });
+    } catch (error) {
+        console.error('Error posting quote to server:', error);
+    }
+}
+async function syncQuotes() {
+    const serverQuotes = await fetchQuotesFromServer();
+    // Resolve conflicts - Server data takes precedence
+    serverQuotes.forEach(serverQuote => {
+        const existingQuote = quotes.find(quote => quote.text === serverQuote.text);
+        if (!existingQuote) {
+            quotes.push(serverQuote);
+        }
+    });
+    saveQuotes();
+    filterQuotes(); // Update the displayed quotes
+}
+
+// Set an interval to sync with the server every 5 minutes
+setInterval(syncWithServer, 300000);
+
+async function addQuote() {
+    const newQuoteText = document.getElementById('newQuoteText').value;
+    const newQuoteCategory = document.getElementById('newQuoteCategory').value;
+    if (newQuoteText && newQuoteCategory) {
+        const newQuote = { text: newQuoteText, category: newQuoteCategory };
+        quotes.push(newQuote);
+        saveQuotes();  // Save quotes to local storage
+        await postQuoteToServer(newQuote);  // Post the new quote to the server
+
+        // Update the categories dropdown if a new category is introduced
+        if (!Array.from(document.getElementById('categoryFilter').options).some(option => option.value === newQuoteCategory)) {
+            const option = document.createElement('option');
+            option.value = newQuoteCategory;
+            option.innerText = newQuoteCategory;
+            document.getElementById('categoryFilter').appendChild(option);
+        }
+
+        document.getElementById('newQuoteText').value = '';
+        document.getElementById('newQuoteCategory').value = '';
+        alert("New quote added successfully!");
+        filterQuotes();  // Update the displayed quotes
+    } else {
+        alert("Please enter both quote text and category.");
+    }
+}
+
