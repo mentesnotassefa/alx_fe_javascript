@@ -53,7 +53,7 @@ function populateCategories() {
     categories.forEach(category => {
         const option = document.createElement('option');
         option.value = category;
-        option.innerText = category;
+        option.textContent = category;
         categoryFilter.appendChild(option);
     });
 
@@ -76,7 +76,7 @@ function filterQuotes() {
 
     filteredQuotes.forEach(quote => {
         const quoteElement = document.createElement('div');
-        quoteElement.innerText = `${quote.text} - ${quote.category}`;
+        quoteElement.textContent = `${quote.text} - ${quote.category}`;
         quoteDisplay.appendChild(quoteElement);
     });
 
@@ -101,7 +101,7 @@ function addQuote() {
          if (!Array.from(document.getElementById('categoryFilter').options).some(option => option.value === newQuoteCategory)) {
             const option = document.createElement('option');
             option.value = newQuoteCategory;
-            option.innerText = newQuoteCategory;
+            option.textContent = newQuoteCategory;
             document.getElementById('categoryFilter').appendChild(option);
         }
         document.getElementById('newQuoteText').value = '';
