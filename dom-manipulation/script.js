@@ -1,8 +1,10 @@
+
+const notificationContainer = document.getElementById('notificationContainer'); // Assuming you have a container for notifications
 async function fetchQuotesFromServer() {
     try {
         const response = await fetch('https://jsonplaceholder.typicode.com/posts');
         const data = await response.json();
-        return data.map(item => ({ text: item.title, category: "Server" }));
+        return data.map(item => ({ text: item.title, category: item.title }));
     } catch (error) {
         console.error('Error fetching quotes from server:', error);
         return [];
@@ -62,6 +64,7 @@ async function addQuote() {
         alert("Please enter both quote text and category.");
     }
 }
+
 
 
 
