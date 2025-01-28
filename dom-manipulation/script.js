@@ -41,6 +41,9 @@ function loadQuotes() {
         quotes = JSON.parse(storedQuotes);
     }
 }
+// Call loadQuotes when the script loads
+loadQuotes();
+
 // Function to load the last selected category filter from local storage
 function loadLastSelectedCategory() {
     return localStorage.getItem('lastSelectedCategory') || 'all';
@@ -76,7 +79,7 @@ function filterQuotes() {
 
     filteredQuotes.forEach(quote => {
         const quoteElement = document.createElement('div');
-        quoteElement.textContent = `${quote.text} - ${quote.category}`;
+        quoteElement.textContent = `Quote:-${quote.text} - Category:-${quote.category}`;
         quoteDisplay.appendChild(quoteElement);
     });
 
@@ -84,9 +87,8 @@ function filterQuotes() {
     saveLastSelectedCategory(selectedCategory);
 }
 
-// Call loadQuotes when the script loads
-loadQuotes();
-populateCategories();
+
+
 
 
 
@@ -139,8 +141,7 @@ function importFromJsonFile(event) {
     fileReader.readAsText(event.target.files[0]);
 }
 
-
-
 // Event listener for the "Show New Quote" button
 document.getElementById('newQuote').addEventListener('click', showRandomQuote);
+populateCategories();
 createAddQuoteForm();
