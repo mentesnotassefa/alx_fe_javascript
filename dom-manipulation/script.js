@@ -21,7 +21,7 @@ async function postQuoteToServer(quote) {
         console.error('Error posting quote to server:', error);
     }
 }
-async function syncWithServer() {
+async function syncQuotes() {
     const serverQuotes = await fetchQuotesFromServer();
     // Resolve conflicts - Server data takes precedence
     serverQuotes.forEach(serverQuote => {
