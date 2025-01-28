@@ -1,4 +1,4 @@
-async function fetchQuotesFromServer() {
+async function syncQuotes() {
     try {
         const response = await fetch('https://jsonplaceholder.typicode.com/posts');
         const data = await response.json();
@@ -22,7 +22,7 @@ async function postQuoteToServer(quote) {
     }
 }
 async function syncWithServer() {
-    const serverQuotes = await fetchQuotesFromServer();
+    const serverQuotes = await syncQuotes();
     // Resolve conflicts - Server data takes precedence
     serverQuotes.forEach(serverQuote => {
         const existingQuote = quotes.find(quote => quote.text === serverQuote.text);
@@ -64,7 +64,7 @@ async function addQuote() {
 }
 
 async function syncWithServer() {
-    const serverQuotes = await fetchQuotesFromServer();
+    const serverQuotes = await syncQuotes();
     const conflicts = [];
 
     serverQuotes.forEach(serverQuote => {
