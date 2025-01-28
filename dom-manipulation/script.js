@@ -1,41 +1,4 @@
-/ Function to show notifications
-function showNotification(message) {
-    const notification = document.getElementById('notification');
-    const notificationMessage = document.getElementById('notificationMessage');
-    notificationMessage.innerText = message;
-    notification.style.display = 'block';
-    setTimeout(() => {
-        notification.style.display = 'none';
-    }, 5000);
-}
 
-// Function to hide notifications
-function hideNotification() {
-    const notification = document.getElementById('notification');
-    notification.style.display = 'none';
-}
-// Function to sync with the server and handle conflicts
-async function syncWithServer() {
-    const serverQuotes = await fetchQuotesFromServer();
-    const conflicts = [];
-
-    serverQuotes.forEach(serverQuote => {
-        const existingQuote = quotes.find(quote => quote.text === serverQuote.text);
-        if (!existingQuote) {
-            quotes.push(serverQuote);
-        } else if (existingQuote.category !== serverQuote.category) {
-            conflicts.push({ local: existingQuote, server: serverQuote });
-            existingQuote.category = serverQuote.category;  // Resolve conflict by taking server's data
-        }
-    });
-
-    if (conflicts.length > 0) {
-        showNotification(`${conflicts.length} conflicts resolved by server data.`);
-    }
-
-    saveQuotes();
-    filterQuotes();  // Update the displayed quotes
-}
 
 async function fetchQuotesFromServer() {
     try {
