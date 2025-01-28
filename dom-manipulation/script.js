@@ -43,7 +43,7 @@ function loadQuotes() {
 }
 
 // Call loadQuotes when the script loads
-loadQuotes
+loadQuotes();
 
 
 
@@ -61,16 +61,18 @@ function addQuote() {
         alert("Please enter both quote text and category.");
     }
 }
-
-// Function to export quotes as a JSON file
-function exportQuotes() {
-    const dataStr = "data:application/json;charset=utf-8," + encodeURIComponent(JSON.stringify(quotes));
-    const downloadAnchorNode = document.createElement('a');
-    downloadAnchorNode.setAttribute("href", dataStr);
-    downloadAnchorNode.setAttribute("download", "quotes.json");
-    document.body.appendChild(downloadAnchorNode);
-    downloadAnchorNode.click();
-    downloadAnchorNode.remove();
+ // Function to export quotes to JSON file
+ function exportToJson() {
+    const jsonStr = JSON.stringify(quotes, null, 2);
+    const blob = new Blob([jsonStr], { type: 'application/json' });
+   const url = URL.createObjectURL(blob);
+     const a = document.createElement('a');
+   a.href = url;
+    a.download = 'quotes.json';
+    document.body.appendChild(a);
+    a.click();
+ document.body.removeChild(a);
+    URL.revokeObjectURL(url);
 }
 
 // Function to import quotes from a JSON file
