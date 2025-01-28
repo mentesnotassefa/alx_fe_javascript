@@ -1,4 +1,4 @@
-async function syncQuotes() {
+async function fetchQuotesFromServer() {
     try {
         const response = await fetch('https://jsonplaceholder.typicode.com/posts');
         const data = await response.json();
@@ -22,7 +22,7 @@ async function postQuoteToServer(quote) {
     }
 }
 async function syncWithServer() {
-    const serverQuotes = await syncQuotes();
+    const serverQuotes = await fetchQuotesFromServer();
     // Resolve conflicts - Server data takes precedence
     serverQuotes.forEach(serverQuote => {
         const existingQuote = quotes.find(quote => quote.text === serverQuote.text);
@@ -63,30 +63,6 @@ async function addQuote() {
     }
 }
 
-async function syncWithServer() {
-    const serverQuotes = await syncQuotes();
-    const conflicts = [];
-
-    serverQuotes.forEach(serverQuote => {
-        const existingQuote = quotes.find(quote => quote.text === serverQuote.text);
-        if (!existingQuote) {
-            quotes.push(serverQuote);
-        } else if (existingQuote.category !== serverQuote.category) {
-            conflicts.push({ local: existingQuote, server: serverQuote });
-            existingQuote.category = serverQuote.category;  // Resolve conflict by taking server's data
-        }
-    });
-
-    if (conflicts.length > 0) {
-        alert(`${conflicts.length} conflicts resolved by server data.`);
-    }
-
-    saveQuotes();
-    filterQuotes(); // Update the displayed quotes
-}
-
-// Set an interval to sync with the server every 5 minutes
-setInterval(syncWithServer, 300000);
 
 
 // Array to store quotes
