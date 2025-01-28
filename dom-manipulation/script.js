@@ -155,7 +155,7 @@ async function fetchQuotesFromServer() {
     try {
         const response = await fetch('https://jsonplaceholder.typicode.com/posts');
         const data = await response.json();
-        return data.map(item => ({ text: item.title, category: "Server" }));
+        return data.map(item => ({ text: item.title, category: "Quotes synced with server!" }));
     } catch (error) {
         console.error('Error fetching quotes from server:', error);
         return [];
